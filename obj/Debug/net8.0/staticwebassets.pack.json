@@ -1,0 +1,33 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\Laptop\\Desktop\\IS-projekat\\IS-server\\wwwroot\\NoPic\\NoPic.png",
+      "PackagePath": "staticwebassets\\NoPic\\NoPic.png"
+    },
+    {
+      "Id": "C:\\Users\\Laptop\\Desktop\\IS-projekat\\IS-server\\wwwroot\\uploads\\BA\\aa4a6f3d-43f0-41bf-93ee-43f074da7907_RCLogo.png",
+      "PackagePath": "staticwebassets\\uploads\\BA\\aa4a6f3d-43f0-41bf-93ee-43f074da7907_RCLogo.png"
+    },
+    {
+      "Id": "C:\\Users\\Laptop\\Desktop\\IS-projekat\\IS-server\\wwwroot\\uploads\\B\\21ba6db6-f4b3-44dd-aaae-402b161408e3_RCLogo.png",
+      "PackagePath": "staticwebassets\\uploads\\B\\21ba6db6-f4b3-44dd-aaae-402b161408e3_RCLogo.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.IS-server.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.IS-server.props",
+      "PackagePath": "build\\IS-server.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.IS-server.props",
+      "PackagePath": "buildMultiTargeting\\IS-server.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.IS-server.props",
+      "PackagePath": "buildTransitive\\IS-server.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
