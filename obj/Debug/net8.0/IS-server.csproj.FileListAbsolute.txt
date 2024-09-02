@@ -137,3 +137,4 @@ C:\Users\Laptop\Desktop\IS-projekat\IS-server\obj\Debug\net8.0\refint\IS-server.
 C:\Users\Laptop\Desktop\IS-projekat\IS-server\obj\Debug\net8.0\IS-server.pdb
 C:\Users\Laptop\Desktop\IS-projekat\IS-server\obj\Debug\net8.0\IS-server.genruntimeconfig.cache
 C:\Users\Laptop\Desktop\IS-projekat\IS-server\obj\Debug\net8.0\ref\IS-server.dll
+C:\Users\Laptop\Desktop\IS-projekat\IS-server\obj\Debug\net8.0\IS-server.sourcelink.json

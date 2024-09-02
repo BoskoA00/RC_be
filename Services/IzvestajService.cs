@@ -1,7 +1,6 @@
 ﻿using IS_server.Data;
 using IS_server.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Frozen;
 
 namespace IS_server.Services
 {

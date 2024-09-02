@@ -2,7 +2,9 @@
 using IS_server.Data;
 using IS_server.DTO;
 using IS_server.Interfaces;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace IS_server.Controllers
 {
@@ -112,18 +114,44 @@ namespace IS_server.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser([FromRoute] int id)
         {
+            foreach (var claim in User.Claims)
+            {
+                Console.WriteLine($"Claim Type: {claim.Type}, Claim Value: {claim.Value}");
+            }
+
+            var userRoleClaim = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (userRoleClaim == null)
+            {
+                Console.WriteLine("Role claim is missing.");
+                return Forbid();
+            }
+
+            // Convert the claim value to an integer
+            if (!int.TryParse(userRoleClaim, out var userRoleValue))
+            {
+                Console.WriteLine("Role claim value is not a valid integer.");
+                return Forbid();
+            }
+
+            // Check if the role matches Admin
+            if (userRoleValue != (int)UserRole.Admin)
+            {
+                Console.WriteLine("User does not have Admin role.");
+                return Forbid();
+            }
+
             var existingUser = await userService.GetUserById(id);
             if (existingUser == null)
             {
                 return NotFound("Korisnik nije pronadjen");
             }
 
-       
-
             await userService.DeleteUser(id);
-
             return NoContent();
         }
+
+
         [HttpPut("promoteUser/{id}")]
         public async Task<IActionResult> PromoteUser([FromRoute] int id)
         {

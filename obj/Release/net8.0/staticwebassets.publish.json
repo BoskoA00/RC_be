@@ -1,0 +1,77 @@
+{
+  "Version": 1,
+  "Hash": "zw/B6QeraHEfz23ru2CpkXn4yBl8uxSxSx0xbhOGczk=",
+  "Source": "IS-server",
+  "BasePath": "_content/IS-server",
+  "Mode": "Default",
+  "ManifestType": "Publish",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "IS-server\\wwwroot",
+      "Source": "IS-server",
+      "ContentRoot": "C:\\Users\\Laptop\\Desktop\\IS-projekat\\IS-server\\wwwroot\\",
+      "BasePath": "_content/IS-server",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\Laptop\\Desktop\\IS-projekat\\IS-server\\wwwroot\\NoPic\\NoPic.png",
+      "SourceId": "IS-server",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Laptop\\Desktop\\IS-projekat\\IS-server\\wwwroot\\",
+      "BasePath": "_content/IS-server",
+      "RelativePath": "NoPic/NoPic.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\NoPic\\NoPic.png"
+    },
+    {
+      "Identity": "C:\\Users\\Laptop\\Desktop\\IS-projekat\\IS-server\\wwwroot\\uploads\\B\\21ba6db6-f4b3-44dd-aaae-402b161408e3_RCLogo.png",
+      "SourceId": "IS-server",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Laptop\\Desktop\\IS-projekat\\IS-server\\wwwroot\\",
+      "BasePath": "_content/IS-server",
+      "RelativePath": "uploads/B/21ba6db6-f4b3-44dd-aaae-402b161408e3_RCLogo.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\B\\21ba6db6-f4b3-44dd-aaae-402b161408e3_RCLogo.png"
+    },
+    {
+      "Identity": "C:\\Users\\Laptop\\Desktop\\IS-projekat\\IS-server\\wwwroot\\uploads\\BA\\aa4a6f3d-43f0-41bf-93ee-43f074da7907_RCLogo.png",
+      "SourceId": "IS-server",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Laptop\\Desktop\\IS-projekat\\IS-server\\wwwroot\\",
+      "BasePath": "_content/IS-server",
+      "RelativePath": "uploads/BA/aa4a6f3d-43f0-41bf-93ee-43f074da7907_RCLogo.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\BA\\aa4a6f3d-43f0-41bf-93ee-43f074da7907_RCLogo.png"
+    }
+  ]
+}

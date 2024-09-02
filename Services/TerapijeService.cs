@@ -1,7 +1,5 @@
 ﻿using IS_server.Data;
-using IS_server.DTO;
 using IS_server.Interfaces;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
 namespace IS_server.Services
