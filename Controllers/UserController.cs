@@ -126,15 +126,12 @@ namespace IS_server.Controllers
                 Console.WriteLine("Role claim is missing.");
                 return Forbid();
             }
-
-            // Convert the claim value to an integer
             if (!int.TryParse(userRoleClaim, out var userRoleValue))
             {
                 Console.WriteLine("Role claim value is not a valid integer.");
                 return Forbid();
             }
 
-            // Check if the role matches Admin
             if (userRoleValue != (int)UserRole.Admin)
             {
                 Console.WriteLine("User does not have Admin role.");
