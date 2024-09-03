@@ -3,20 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\Laptop\\Desktop\\IS-projekat\\IS-server\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B0399196-D50E-48F1-87B3-B26E10328A27}|IS-server.csproj|c:\\users\\laptop\\desktop\\is-projekat\\is-server\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B0399196-D50E-48F1-87B3-B26E10328A27}|IS-server.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B0399196-D50E-48F1-87B3-B26E10328A27}|IS-server.csproj|c:\\users\\laptop\\desktop\\is-projekat\\is-server\\controllers\\izvestajcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B0399196-D50E-48F1-87B3-B26E10328A27}|IS-server.csproj|solutionrelative:controllers\\izvestajcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B0399196-D50E-48F1-87B3-B26E10328A27}|IS-server.csproj|c:\\users\\laptop\\desktop\\is-projekat\\is-server\\data\\enums.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B0399196-D50E-48F1-87B3-B26E10328A27}|IS-server.csproj|solutionrelative:data\\enums.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B0399196-D50E-48F1-87B3-B26E10328A27}|IS-server.csproj|c:\\users\\laptop\\desktop\\is-projekat\\is-server\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B0399196-D50E-48F1-87B3-B26E10328A27}|IS-server.csproj|solutionrelative:services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B0399196-D50E-48F1-87B3-B26E10328A27}|IS-server.csproj|c:\\users\\laptop\\desktop\\is-projekat\\is-server\\controllers\\opremacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B0399196-D50E-48F1-87B3-B26E10328A27}|IS-server.csproj|solutionrelative:controllers\\opremacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B0399196-D50E-48F1-87B3-B26E10328A27}|IS-server.csproj|c:\\users\\laptop\\desktop\\is-projekat\\is-server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -30,24 +18,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Enums.cs",
-              "DocumentMoniker": "C:\\Users\\Laptop\\Desktop\\IS-projekat\\IS-server\\Data\\Enums.cs",
-              "RelativeDocumentMoniker": "Data\\Enums.cs",
-              "ToolTip": "C:\\Users\\Laptop\\Desktop\\IS-projekat\\IS-server\\Data\\Enums.cs",
-              "RelativeToolTip": "Data\\Enums.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
+              "DocumentIndex": 0,
+              "Title": "OpremaController.cs",
+              "DocumentMoniker": "C:\\Users\\Laptop\\Desktop\\IS-projekat\\IS-server\\Controllers\\OpremaController.cs",
+              "RelativeDocumentMoniker": "Controllers\\OpremaController.cs",
+              "ToolTip": "C:\\Users\\Laptop\\Desktop\\IS-projekat\\IS-server\\Controllers\\OpremaController.cs",
+              "RelativeToolTip": "Controllers\\OpremaController.cs",
+              "ViewState": "AQIAAHYAAAAAAAAAAAAAAI0AAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-02T22:23:46.09Z",
+              "WhenOpened": "2024-09-03T15:21:01.689Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Laptop\\Desktop\\IS-projekat\\IS-server\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -56,45 +44,6 @@
               "ViewState": "AQIAACQAAAAAAAAAAAAgwE0AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-02T21:52:48.344Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "IzvestajController.cs",
-              "DocumentMoniker": "C:\\Users\\Laptop\\Desktop\\IS-projekat\\IS-server\\Controllers\\IzvestajController.cs",
-              "RelativeDocumentMoniker": "Controllers\\IzvestajController.cs",
-              "ToolTip": "C:\\Users\\Laptop\\Desktop\\IS-projekat\\IS-server\\Controllers\\IzvestajController.cs",
-              "RelativeToolTip": "Controllers\\IzvestajController.cs",
-              "ViewState": "AQIAABgAAAAAAAAAAAAAADIAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-02T08:57:36.348Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "UserController.cs",
-              "DocumentMoniker": "C:\\Users\\Laptop\\Desktop\\IS-projekat\\IS-server\\Controllers\\UserController.cs",
-              "RelativeDocumentMoniker": "Controllers\\UserController.cs",
-              "ToolTip": "C:\\Users\\Laptop\\Desktop\\IS-projekat\\IS-server\\Controllers\\UserController.cs",
-              "RelativeToolTip": "Controllers\\UserController.cs",
-              "ViewState": "AQIAAG8AAAAAAAAAAAAgwJgAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-02T08:54:52.785Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "UserService.cs",
-              "DocumentMoniker": "C:\\Users\\Laptop\\Desktop\\IS-projekat\\IS-server\\Services\\UserService.cs",
-              "RelativeDocumentMoniker": "Services\\UserService.cs",
-              "ToolTip": "C:\\Users\\Laptop\\Desktop\\IS-projekat\\IS-server\\Services\\UserService.cs",
-              "RelativeToolTip": "Services\\UserService.cs",
-              "ViewState": "AQIAAD0AAAAAAAAAAAAgwE8AAAAHAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-02T08:54:39.312Z",
               "EditorCaption": ""
             }
           ]

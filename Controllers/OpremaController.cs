@@ -4,6 +4,7 @@ using IS_server.DTO;
 using IS_server.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace IS_server.Controllers
@@ -52,6 +53,18 @@ namespace IS_server.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateOprema([FromBody] AddOpremaDTO request)
         {
+            var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (userRole == null)
+            {
+                return Forbid();
+            }
+
+            if (int.Parse(userRole) != (int)UserRole.Admin)
+            {
+                return Forbid();
+            }
+
             if (await os.SifraTaken(request.sifra))
             {
                 return BadRequest("Sifra je zauzeta");
@@ -70,6 +83,19 @@ namespace IS_server.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateOprema([FromRoute] int id, [FromBody] UpdateOpremaDTO request)
         {
+            var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (userRole == null)
+            {
+                return Forbid();
+            }
+
+            if (int.Parse(userRole) != (int)UserRole.Admin)
+            {
+                return Forbid();
+            }
+
+
             var oprema = await os.GetById(id);
             if (await os.SifraTaken(request.sifra) && oprema.Id != id)
             {
@@ -94,6 +120,19 @@ namespace IS_server.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteOprema([FromRoute] int id)
         {
+            var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (userRole == null)
+            {
+                return Forbid();
+            }
+
+            if (int.Parse(userRole) != (int)UserRole.Admin)
+            {
+                return Forbid();
+            }
+
+
             await os.DeleteOprema(id);
             return NoContent();
         }

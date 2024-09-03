@@ -5,6 +5,8 @@ using IS_server.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace IS_server.Controllers
@@ -43,6 +45,19 @@ namespace IS_server.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateSoba([FromBody] AddSobaDTO request)
         {
+
+            var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
+
+
+            if (userRole == null) {
+                return Forbid();
+            }
+
+            if(int.Parse(userRole) != (int)UserRole.Admin )
+            {
+                return Forbid();
+            }
+
             Soba? provera = await ss.GetSobaByBrSobe(request.brojSobe);
 
             if (provera != null)
@@ -56,6 +71,18 @@ namespace IS_server.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateSoba([FromRoute] int id, [FromBody] UpdateSobaDTO request)
         {
+            var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (userRole == null)
+            {
+                return Forbid();
+            }
+
+            if (int.Parse(userRole) != (int)UserRole.Admin )
+            {
+                return Forbid();
+            }
+
             Soba s = await ss.GetById(id);
             if (s == null)
             {
@@ -73,6 +100,18 @@ namespace IS_server.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteSoba([FromRoute] int id)
         {
+
+            var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (userRole == null)
+            {
+                return Forbid();
+            }
+
+            if (int.Parse(userRole) != (int)UserRole.Admin )
+            {
+                return Forbid();
+            }
             Soba s = await ss.DeleteSoba(id);
             if (s == null)
             {
@@ -84,6 +123,17 @@ namespace IS_server.Controllers
         [HttpPut("reserve/{brSobe}")]
         public async Task<IActionResult> ReserveRoom([FromRoute] string brSobe)
         {
+            var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (userRole == null)
+            {
+                return Forbid();
+            }
+
+            if (int.Parse(userRole) == (int)UserRole.Patient)
+            {
+                return Forbid();
+            }
             if (await ss.ReserveRoom(brSobe))
             {
                 return Ok();
@@ -97,6 +147,17 @@ namespace IS_server.Controllers
         [HttpPut("disable/{brSobe}")]
         public async Task<IActionResult> DisableRoom([FromRoute] string brSobe)
         {
+            var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
+            if (userRole == null)
+            {
+                return Forbid();
+            }
+
+            if (int.Parse(userRole) != (int)UserRole.Admin)
+            {
+                return Forbid();
+            }
+
             if (await ss.DisableRoom(brSobe))
             {
                 return Ok();
@@ -110,6 +171,19 @@ namespace IS_server.Controllers
         [HttpPut("free/{brSobe}")]
         public async Task<IActionResult> FreeRoom([FromRoute] string brSobe)
         {
+
+            var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (userRole == null)
+            {
+                return Forbid();
+            }
+
+            if (int.Parse(userRole) == (int)UserRole.Patient)
+            {
+                return Forbid();
+            }
+
             if (await ss.FreeRoom(brSobe))
             {
                 return Ok();

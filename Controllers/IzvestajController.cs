@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Security.Claims;
 
 namespace IS_server.Controllers
 {
@@ -49,6 +50,22 @@ namespace IS_server.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateIzvestaj([FromBody] AddIzvestajDTO request)
         {
+
+            var userRoleClaim = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (userRoleClaim == null)
+            {
+                return Forbid();
+            }
+            if (!int.TryParse(userRoleClaim, out var userRoleValue))
+            {
+                return Forbid();
+            }
+
+            if (userRoleValue == (int)UserRole.Patient )
+            {
+                return Forbid();
+            }
             if (request == null)
             {
                 return BadRequest("Los zahtev");
@@ -60,11 +77,27 @@ namespace IS_server.Controllers
             Izvestaj izv = mapper.Map<Izvestaj>(request);
             await izvestajService.CreateIzvestaj(izv);
             return Ok(izv);
-        }
+            }
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateIzvestaj([FromBody] UpdateIzvestajDTO request, [FromRoute] int id)
         {
-            if(request == null)
+            var userRoleClaim = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (userRoleClaim == null)
+            {
+                return Forbid();
+            }
+            if (!int.TryParse(userRoleClaim, out var userRoleValue))
+            {
+                return Forbid();
+            }
+
+            if (userRoleValue == (int)UserRole.Patient)
+            {
+                return Forbid();
+            }
+
+            if (request == null)
             {
                 return BadRequest("Los zahtev");
             }
@@ -73,6 +106,18 @@ namespace IS_server.Controllers
             {
                 return BadRequest("Ne postoji zeljeni izvestaj");
             }
+
+            var idToken = User.FindFirst("id")?.Value;
+
+            if( userRoleValue == (int)UserRole.Doctor)
+            {
+            if (int.Parse(idToken) != izv.idDoktora)
+            {
+
+                return Forbid();
+            }
+            }
+
             Izvestaj izvUpdated = mapper.Map<UpdateIzvestajDTO, Izvestaj>(request, izv);
             await izvestajService.UpdateIzvestaj(izvUpdated);
             return Ok(izvUpdated);
@@ -80,24 +125,82 @@ namespace IS_server.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteById([FromRoute] int id)
         {
+            var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (int.Parse(userRole) == (int)UserRole.Patient) {
+                return Forbid();
+            }
+
+            Izvestaj izv = await izvestajService.GetById(id);
+            if (izv == null) {
+
+                return BadRequest();
+            }
+            if (int.Parse(userRole) == (int)UserRole.Doctor) {
+
+                var idUser = User.FindFirst("id")?.Value;
+                
+                if(int.Parse(idUser) != izv.idDoktora)
+                {
+                    return Forbid();
+                }
+            }
             await izvestajService.DeleteById(id);
             return NoContent();
         }
         [HttpDelete("deleteByCode/{code}")]
         public async Task<IActionResult> DeleteByCode([FromRoute] string code)
         {
+            var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (int.Parse(userRole) == (int)UserRole.Patient)
+            {
+                return Forbid();
+            }
+
+            Izvestaj izv = await izvestajService.GetIzvestajByCode(code);
+            if (izv == null)
+            {
+
+                return BadRequest();
+            }
+            if (int.Parse(userRole) == (int)UserRole.Doctor)
+            {
+
+                var idUser = User.FindFirst("id")?.Value;
+
+                if (int.Parse(idUser) != izv.idDoktora)
+                {
+                    return Forbid();
+                }
+            }
             await izvestajService.DeleteByCode(code);
             return NoContent();
         }
         [HttpDelete("byDoktorId/{idDoktora}")]
         public async Task<IActionResult> DeleteByDoktorId([FromRoute] int idDoktora)
         {
+
+            var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            if( int.Parse(userRole) != (int)UserRole.Admin)
+            {
+                return Forbid();
+            }
+
             await izvestajService.DeleteByDoktor(idDoktora);
             return NoContent();
         }
         [HttpDelete("byPacijentId/{idPacijenta}")]
         public async Task<IActionResult> DeleteByPacijentId([FromRoute] int idPacijenta)
         {
+            var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (int.Parse(userRole) != (int)UserRole.Admin)
+            {
+                return Forbid();
+            }
+
             await izvestajService.DeleteByPacijent(idPacijenta);
             return NoContent();
         }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Security.Claims;
 
 namespace IS_server.Controllers
 {
@@ -15,12 +16,14 @@ namespace IS_server.Controllers
     public class SesijaController : ControllerBase
     {
         private readonly ISesija ss;
+        private readonly ITerapija ts;
         private readonly IMapper mapper;
 
-        public SesijaController(ISesija sesijaService, IMapper _mapper)
+        public SesijaController(ITerapija terapijaService, ISesija sesijaService, IMapper _mapper)
         {
             this.ss = sesijaService;
             this.mapper = _mapper;
+            this.ts = terapijaService;
         }
 
         [HttpGet]
@@ -56,6 +59,17 @@ namespace IS_server.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateSesija([FromBody] AddSesijaDTO request)
         {
+            var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (userRole == null)
+            {
+                return Forbid();
+            }
+            if (int.Parse(userRole) == (int)UserRole.Patient)
+            {
+                return Forbid();
+            }
+
             if(request == null)
             {
                 return BadRequest("Los zahtev");
@@ -66,6 +80,18 @@ namespace IS_server.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateSesija([FromRoute] int id,[FromBody] UpdateSesijaDTO request)
         {
+
+            var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (userRole == null)
+            {
+                return Forbid();
+            }
+            if (int.Parse(userRole) == (int)UserRole.Patient)
+            {
+                return Forbid();
+            }
+
             Sesija s = await ss.GetSesijaById(id);
             if(s == null)
             {
@@ -82,12 +108,61 @@ namespace IS_server.Controllers
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteSesija([FromRoute] int id)
         {
+            var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (userRole == null)
+            {
+                return Forbid();
+            }
+            if (int.Parse(userRole) == (int)UserRole.Patient)
+            {
+                return Forbid();
+            }
+
+            Sesija s = await ss.GetSesijaById(id);
+            Terapija t = await ts.GetTerapijaById(s.idTerapije);
+
+            var idToken = User.FindFirst("id")?.Value;
+
+            if (int.Parse(userRole) == (int)UserRole.Doctor)
+            {
+                if (t.idDoktora != int.Parse(idToken)) {
+                    return Forbid();
+                }
+            }
+
+
+
             await ss.DeleteSesija(id);
             return NoContent();
         }
         [HttpDelete("Terapije/{idTerapije}")]
         public async Task<IActionResult> DeleteSesijeByTerapija([FromRoute] int idTerapije)
         {
+            var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (userRole == null)
+            {
+                return Forbid();
+            }
+            if (int.Parse(userRole) == (int)UserRole.Patient)
+            {
+                return Forbid();
+            }
+
+            Terapija t = await ts.GetTerapijaById(idTerapije);
+
+            var idToken = User.FindFirst("id")?.Value;
+
+            if (int.Parse(userRole) == (int)UserRole.Doctor)
+            {
+                if (t.idDoktora != int.Parse(idToken))
+                {
+                    return Forbid();
+                }
+            }
+
+
             await ss.DeleteSesijeByTerapija(idTerapije);
             return NoContent();
 

@@ -4,6 +4,7 @@ using IS_server.DTO;
 using IS_server.Interfaces;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Security.Claims;
 
 namespace IS_server.Controllers
@@ -90,12 +91,12 @@ namespace IS_server.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateUser([FromRoute] int id, [FromBody] UpdateUserRequestDTO request)
         {
+            
             var existingUser = await userService.GetUserById(id);
             if (existingUser == null)
             {
                 return NotFound("User not found");
             }
-
           
 
             existingUser.firstName = request.firstName;
@@ -114,23 +115,20 @@ namespace IS_server.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser([FromRoute] int id)
         {
-   
+
             var userRoleClaim = User.FindFirst(ClaimTypes.Role)?.Value;
 
             if (userRoleClaim == null)
             {
-                Console.WriteLine("Role claim is missing.");
                 return Forbid();
             }
             if (!int.TryParse(userRoleClaim, out var userRoleValue))
             {
-                Console.WriteLine("Role claim value is not a valid integer.");
                 return Forbid();
             }
 
             if (userRoleValue != (int)UserRole.Admin)
             {
-                Console.WriteLine("User does not have Admin role.");
                 return Forbid();
             }
 
@@ -148,6 +146,23 @@ namespace IS_server.Controllers
         [HttpPut("promoteUser/{id}")]
         public async Task<IActionResult> PromoteUser([FromRoute] int id)
         {
+            var userRoleClaim = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (userRoleClaim == null)
+            {
+                return Forbid();
+            }
+            if (!int.TryParse(userRoleClaim, out var userRoleValue))
+            {
+                return Forbid();
+            }
+
+            if (userRoleValue != (int)UserRole.Admin)
+            {
+                return Forbid();
+            }
+
+
             bool status = await userService.PromoteUser(id);
             if (status)
             {
@@ -161,6 +176,22 @@ namespace IS_server.Controllers
         [HttpPut("demoteUser/{id}")]
         public async Task<IActionResult> DemoteUser([FromRoute] int id)
         {
+            var userRoleClaim = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (userRoleClaim == null)
+            {
+                return Forbid();
+            }
+            if (!int.TryParse(userRoleClaim, out var userRoleValue))
+            {
+                return Forbid();
+            }
+
+            if (userRoleValue != (int)UserRole.Admin)
+            {
+                return Forbid();
+            }
+
             bool status = await userService.DemoteUser(id);
             if (status)
             {

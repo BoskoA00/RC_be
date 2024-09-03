@@ -5,6 +5,7 @@ using IS_server.Interfaces;
 using IS_server.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace IS_server.Controllers
 {
@@ -54,6 +55,11 @@ namespace IS_server.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateTerapija([FromBody] TerapijeAddDTO request)
         {
+            var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (int.Parse(userRole) == (int)UserRole.Patient) {
+                return Forbid();
+            }
             if (request == null)
             {
                 return BadRequest("Los zahtev");
@@ -70,7 +76,27 @@ namespace IS_server.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateTerapija( [FromBody] TerapijeUpdateDTO request)
         {
+            var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (int.Parse(userRole) == (int)UserRole.Patient)
+            {
+                return Forbid();
+            }
+
+
+
             Terapija? terapija = await ts.GetTerapijaById(request.id);
+
+            var idUser = User.FindFirst("id")?.Value;
+
+            if (int.Parse(userRole) == (int)UserRole.Doctor)
+            {
+                if (terapija.idDoktora != int.Parse(idUser)) { 
+                return Forbid();
+                }
+            }
+
+
             if (terapija == null)
             {
                 return NotFound();
@@ -87,20 +113,51 @@ namespace IS_server.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteById([FromRoute] int id)
         {
-            if (await ts.GetTerapijaById(id) == null)
+            var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (int.Parse(userRole) == (int)UserRole.Patient)
+            {
+                return Forbid();
+            }
+            Terapija terapija = await ts.GetTerapijaById(id);
+            
+            if (terapija== null)
             {
                 return NotFound("Ne postoji trazena terapija");
             }
+
+            var idUser = User.FindFirst("id")?.Value;
+
+            if (int.Parse(userRole) == (int)UserRole.Doctor && terapija.idDoktora != int.Parse(idUser))
+            {
+                    return Forbid();
+            }
+
             await ts.DeleteTerapijaById(id);
-            return Ok("Terapija je izbrisana");
+            return NoContent();
         }
 
         [HttpDelete("code/{code}")]
         public async Task<IActionResult> DeleteByCode([FromRoute] string code)
         {
-            if (await ts.GetTerapijaByCode(code) == null)
+            var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (int.Parse(userRole) == (int)UserRole.Patient)
+            {
+                return Forbid();
+            }
+            Terapija terapija = await ts.GetTerapijaByCode(code);
+
+            if (terapija == null)
             {
                 return NotFound("Ne postoji trazena terapija");
+            }
+
+            var idUser = User.FindFirst("id")?.Value;
+
+            if (int.Parse(userRole) == (int)UserRole.Doctor && terapija.idDoktora != int.Parse(idUser))
+            {
+                return Forbid();
             }
             await ts.DeleteTerapijaByCode(code);
             return Ok("Terapija je izbrisana");
