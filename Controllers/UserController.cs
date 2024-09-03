@@ -114,11 +114,7 @@ namespace IS_server.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser([FromRoute] int id)
         {
-            foreach (var claim in User.Claims)
-            {
-                Console.WriteLine($"Claim Type: {claim.Type}, Claim Value: {claim.Value}");
-            }
-
+   
             var userRoleClaim = User.FindFirst(ClaimTypes.Role)?.Value;
 
             if (userRoleClaim == null)
