@@ -17,11 +17,11 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<DatabaseContext>(o => o.UseSqlServer(configuration.GetConnectionString("LocalConnection")));
 builder.Services.AddScoped<IUser, UserService>();
-builder.Services.AddScoped<ISesija, SesijaServis>();
-builder.Services.AddScoped<ITerapija, TerapijeService>();
-builder.Services.AddScoped<IOprema, OpremaService>();
-builder.Services.AddScoped<ISoba, SobaService>();
-builder.Services.AddScoped<IIzvestaj, IzvestajService>();
+builder.Services.AddScoped<IS_server.Interfaces.ISession, SessionService>();
+builder.Services.AddScoped<ITherapy, TherapyService>();
+builder.Services.AddScoped<IEquipment, EquipmentService>();
+builder.Services.AddScoped<IRoom, RoomService>();
+builder.Services.AddScoped<IReport, ReportService>();
 builder.Services.AddScoped<IMessage, MessagesService>();
 builder.Services.AddAutoMapper(typeof(Program));
 

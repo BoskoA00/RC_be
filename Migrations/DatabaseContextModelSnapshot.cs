@@ -17,44 +17,41 @@ namespace IS_server.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.6")
+                .HasAnnotation("ProductVersion", "6.0.16")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("IS_server.Data.Izvestaj", b =>
+            modelBuilder.Entity("IS_server.Data.Equipment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("idDoktora")
+                    b.Property<string>("code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("lastMaintenance")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("roomId")
                         .HasColumnType("int");
-
-                    b.Property<int>("idPacijenta")
-                        .HasColumnType("int");
-
-                    b.Property<string>("sadrzaj")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("sifra")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("vremeStvaranja")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("idDoktora");
+                    b.HasIndex("roomId")
+                        .IsUnique()
+                        .HasFilter("[roomId] IS NOT NULL");
 
-                    b.HasIndex("idPacijenta");
-
-                    b.ToTable("Izvestaji");
+                    b.ToTable("Equipment");
                 });
 
             modelBuilder.Entity("IS_server.Data.Message", b =>
@@ -63,7 +60,7 @@ namespace IS_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Content")
                         .IsRequired()
@@ -92,77 +89,53 @@ namespace IS_server.Migrations
 
                     b.HasIndex("senderId");
 
-                    b.ToTable("Poruke");
+                    b.ToTable("Messages");
                 });
 
-            modelBuilder.Entity("IS_server.Data.Oprema", b =>
+            modelBuilder.Entity("IS_server.Data.Report", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("idSobe")
+                    b.Property<string>("code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("creationTime")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("doctorId")
                         .HasColumnType("int");
 
-                    b.Property<string>("naziv")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("poslednjeOdrzavanje")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("sifra")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("patientId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("idSobe")
-                        .IsUnique()
-                        .HasFilter("[idSobe] IS NOT NULL");
+                    b.HasIndex("doctorId");
 
-                    b.ToTable("Opreme");
+                    b.HasIndex("patientId");
+
+                    b.ToTable("Reports");
                 });
 
-            modelBuilder.Entity("IS_server.Data.Sesija", b =>
+            modelBuilder.Entity("IS_server.Data.Room", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("idSobe")
-                        .HasColumnType("int");
-
-                    b.Property<int>("idTerapije")
-                        .HasColumnType("int");
-
-                    b.Property<string>("termin")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("idSobe");
-
-                    b.HasIndex("idTerapije");
-
-                    b.ToTable("Sesije");
-                });
-
-            modelBuilder.Entity("IS_server.Data.Soba", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("brojSobe")
+                    b.Property<string>("roomNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -171,49 +144,76 @@ namespace IS_server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Sobe");
+                    b.ToTable("Rooms");
                 });
 
-            modelBuilder.Entity("IS_server.Data.Terapija", b =>
+            modelBuilder.Entity("IS_server.Data.Session", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("brojSesija")
-                        .HasColumnType("int");
-
-                    b.Property<string>("datumKraja")
+                    b.Property<string>("dateTime")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("datumPocetka")
+                    b.Property<int>("roomId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("therapyId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("roomId");
+
+                    b.HasIndex("therapyId");
+
+                    b.ToTable("Sessions");
+                });
+
+            modelBuilder.Entity("IS_server.Data.Therapy", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("code")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("idDoktora")
-                        .HasColumnType("int");
-
-                    b.Property<int>("idPacijenta")
-                        .HasColumnType("int");
-
-                    b.Property<string>("sadrzaj")
+                    b.Property<string>("content")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("sifra")
+                    b.Property<int>("doctorId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("endDate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("patientId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("sessionsNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("startDate")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("idDoktora");
+                    b.HasIndex("doctorId");
 
-                    b.HasIndex("idPacijenta");
+                    b.HasIndex("patientId");
 
-                    b.ToTable("Terapije");
+                    b.ToTable("Therapies");
                 });
 
             modelBuilder.Entity("IS_server.Data.User", b =>
@@ -222,17 +222,17 @@ namespace IS_server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("datumRodjenja")
+                    b.Property<string>("birthDate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("contact")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("firstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("kontakt")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -256,23 +256,13 @@ namespace IS_server.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("IS_server.Data.Izvestaj", b =>
+            modelBuilder.Entity("IS_server.Data.Equipment", b =>
                 {
-                    b.HasOne("IS_server.Data.User", "Doktor")
-                        .WithMany()
-                        .HasForeignKey("idDoktora")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("IS_server.Data.Room", "room")
+                        .WithOne("equipment")
+                        .HasForeignKey("IS_server.Data.Equipment", "roomId");
 
-                    b.HasOne("IS_server.Data.User", "Pacijent")
-                        .WithMany()
-                        .HasForeignKey("idPacijenta")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Doktor");
-
-                    b.Navigation("Pacijent");
+                    b.Navigation("room");
                 });
 
             modelBuilder.Entity("IS_server.Data.Message", b =>
@@ -294,56 +284,66 @@ namespace IS_server.Migrations
                     b.Navigation("Sender");
                 });
 
-            modelBuilder.Entity("IS_server.Data.Oprema", b =>
+            modelBuilder.Entity("IS_server.Data.Report", b =>
                 {
-                    b.HasOne("IS_server.Data.Soba", "soba")
-                        .WithOne("oprema")
-                        .HasForeignKey("IS_server.Data.Oprema", "idSobe");
+                    b.HasOne("IS_server.Data.User", "Doctor")
+                        .WithMany()
+                        .HasForeignKey("doctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("soba");
+                    b.HasOne("IS_server.Data.User", "Patient")
+                        .WithMany()
+                        .HasForeignKey("patientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Doctor");
+
+                    b.Navigation("Patient");
                 });
 
-            modelBuilder.Entity("IS_server.Data.Sesija", b =>
+            modelBuilder.Entity("IS_server.Data.Session", b =>
                 {
-                    b.HasOne("IS_server.Data.Soba", "soba")
+                    b.HasOne("IS_server.Data.Room", "room")
                         .WithMany()
-                        .HasForeignKey("idSobe")
+                        .HasForeignKey("roomId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("IS_server.Data.Terapija", "terapija")
+                    b.HasOne("IS_server.Data.Therapy", "therapy")
                         .WithMany()
-                        .HasForeignKey("idTerapije")
+                        .HasForeignKey("therapyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("soba");
+                    b.Navigation("room");
 
-                    b.Navigation("terapija");
+                    b.Navigation("therapy");
                 });
 
-            modelBuilder.Entity("IS_server.Data.Terapija", b =>
+            modelBuilder.Entity("IS_server.Data.Therapy", b =>
                 {
-                    b.HasOne("IS_server.Data.User", "Doktor")
+                    b.HasOne("IS_server.Data.User", "doctor")
                         .WithMany()
-                        .HasForeignKey("idDoktora")
+                        .HasForeignKey("doctorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("IS_server.Data.User", "Pacijent")
+                    b.HasOne("IS_server.Data.User", "patient")
                         .WithMany()
-                        .HasForeignKey("idPacijenta")
+                        .HasForeignKey("patientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Doktor");
+                    b.Navigation("doctor");
 
-                    b.Navigation("Pacijent");
+                    b.Navigation("patient");
                 });
 
-            modelBuilder.Entity("IS_server.Data.Soba", b =>
+            modelBuilder.Entity("IS_server.Data.Room", b =>
                 {
-                    b.Navigation("oprema")
+                    b.Navigation("equipment")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

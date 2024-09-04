@@ -29,11 +29,11 @@ namespace IS_server.Controllers
             User? user = await userService.GetUserByUserName(request.userName);
             if (user == null)
             {
-                return BadRequest("Ne postoji korisnik sa ovim korisnickim imenom");    
+                return BadRequest("User doesn't exist.");    
             }
             if( user.password != userService.HashPassword(request.password))
             {
-                return BadRequest("Neodgovarajuca lozinka");
+                return BadRequest("Wrong password.");
             }
 
             var token = userService.GenerateToken(user);
@@ -74,11 +74,11 @@ namespace IS_server.Controllers
             bool passwordTaken = userService.TakenPassword(request.password);
             if (usernameTaken)
             {
-                return BadRequest("Korisničko ime je zauzeto");
+                return BadRequest("Username taken.");
             }
             if (passwordTaken)
             {
-                return BadRequest("Lozinka je zauzeta");
+                return BadRequest("Password taken.");
             }
             request.password = userService.HashPassword(request.password);
             User user = mapper.Map<User>(request);
@@ -104,7 +104,7 @@ namespace IS_server.Controllers
             existingUser.userName = request.userName;
             existingUser.password = request.password;
             existingUser.role = request.role;
-            existingUser.kontakt = request.kontakt;
+            existingUser.contact = request.contact;
           
 
             await userService.UpdateUser(existingUser);
@@ -135,7 +135,7 @@ namespace IS_server.Controllers
             var existingUser = await userService.GetUserById(id);
             if (existingUser == null)
             {
-                return NotFound("Korisnik nije pronadjen");
+                return NotFound("User not found.");
             }
 
             await userService.DeleteUser(id);

@@ -7,7 +7,7 @@
         public string userName { get; set; }
         public string password { get; set; }
         public string role { get; set; }
-        public string kontakt { get; set; }
-        public string datumRodjenja { get; set; }
+        public string contact { get; set; }
+        public string birthDate { get; set; }
     }
 }

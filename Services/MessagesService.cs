@@ -16,48 +16,48 @@ namespace IS_server.Services
 
         public async Task<Message> CreateMessage(Message message)
         {
-            databaseContext.Poruke.Add(message);
+            databaseContext.Messages.Add(message);
             await databaseContext.SaveChangesAsync();
             return message;
         }
 
         public async Task<bool> DeleteMessagesByUser(int userId)
         {
-            List<Message> messages = await databaseContext.Poruke.Where(m => m.receiverId == userId || m.senderId == userId).ToListAsync();
-            databaseContext.Poruke.RemoveRange(messages);
+            List<Message> messages = await databaseContext.Messages.Where( message => message.receiverId == userId || message.senderId == userId).ToListAsync();
+            databaseContext.Messages.RemoveRange(messages);
             await databaseContext.SaveChangesAsync();
             return true;
         }
 
         public async Task<List<Message>> GetAllMessages()
         {
-            return await databaseContext.Poruke.ToListAsync(); }
+            return await databaseContext.Messages.ToListAsync(); }
 
         public async Task<List<Message>> GetAllMessagesByReceiver(int id)
         {
-            return await databaseContext.Poruke.Where(m => m.receiverId == id).ToListAsync();
+            return await databaseContext.Messages.Where( message => message.receiverId == id).ToListAsync();
         }
 
         public async Task<List<Message>> GetAllMessagesByUser(int userId)
         {
-            return await databaseContext.Poruke.Where(m => m.receiverId == userId || m.senderId == userId).ToListAsync();
+            return await databaseContext.Messages.Where( message => message.receiverId == userId || message.senderId == userId).ToListAsync();
         }
 
         public async Task<List<Message>> GetMessagesBySender(int id)
         {
-            return await databaseContext.Poruke.Where(m => m.senderId == id).ToListAsync();
+            return await databaseContext.Messages.Where( message => message.senderId == id).ToListAsync();
         }
 
         public async Task<bool> ReadMessage(int id)
         {
-            Message? m = await databaseContext.Poruke.Where( m => m.Id == id).FirstOrDefaultAsync();
-            if(m == null)
+            Message? message = await databaseContext.Messages.Where( message => message.Id == id).FirstOrDefaultAsync();
+            if(message == null)
             {
                 return false;
             }
             else
             {
-                m.status = 1;
+                message.status = 1;
                 await databaseContext.SaveChangesAsync();
                 return true;
             }

@@ -9,7 +9,7 @@ namespace IS_server.DTO
         public string lastName { get; set; }
         public string userName { get; set; }
         public int role { get; set; }
-        public string kontakt { get; set; }
-        public string datumRodjenja { get; set; }
+        public string contact { get; set; }
+        public string birthDate { get; set; }
     }
 }

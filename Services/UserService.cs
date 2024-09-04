@@ -39,7 +39,7 @@ namespace IS_server.Services
 
         public async Task<User?> DeleteByUserName(string userName)
         {
-            User? user = await db.Users.Where(u => u.userName == userName).FirstOrDefaultAsync();
+            User? user = await db.Users.Where( user => user.userName == userName).FirstOrDefaultAsync();
 
             if (user == null)
             {
@@ -54,22 +54,23 @@ namespace IS_server.Services
 
         public async Task<User?> DeleteUser(int id)
         {
-            User? user = await db.Users.Where(u => u.Id == id).FirstOrDefaultAsync();
-            List<Terapija> terapije = await db.Terapije.Where(t => t.idPacijenta == id || t.idDoktora == id).ToListAsync();
-            foreach (Terapija terapija in terapije)
+            User? user = await db.Users.Where( user => user.Id == id).FirstOrDefaultAsync();
+            List<Therapy> therapies = await db.Therapies.Where(therapy => therapy.patientId == id || therapy.doctorId == id).ToListAsync();
+            foreach (Therapy therapy in therapies)
             {
-                List<Sesija> sesije = await db.Sesije.Where(s => s.idTerapije == terapija.Id).ToListAsync();
-                db.Sesije.RemoveRange(sesije);
+                List<Session> sessions = await db.Sessions.Where( session => session.therapyId == therapy.Id).ToListAsync();
+                db.Sessions.RemoveRange(sessions);
             }
-            db.Terapije.RemoveRange(terapije);
-            List<Izvestaj> izvestaji = await db.Izvestaji.Where(i => i.idPacijenta == id || i.idDoktora == id).ToListAsync();
-            db.Izvestaji.RemoveRange(izvestaji);
+            db.Therapies.RemoveRange(therapies);
+            List<Report> reports = await db.Reports.Where(therapy => therapy.patientId == id || therapy.doctorId == id).ToListAsync();
+            db.Reports.RemoveRange(reports);
             if (user == null)
             {
                 return null;
             }
-            List<Message> poruke = await db.Poruke.Where(m => m.senderId == id || m.receiverId == id ).ToListAsync();
-            db.Poruke.RemoveRange(poruke);
+            List<Message> messages = await db.Messages.Where( message => message.senderId == id || message.receiverId == id ).ToListAsync();
+            
+            db.Messages.RemoveRange(messages);
 
             db.Users.Remove(user);
             await db.SaveChangesAsync();

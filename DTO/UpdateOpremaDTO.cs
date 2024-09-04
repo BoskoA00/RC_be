@@ -2,9 +2,9 @@
 {
     public class UpdateOpremaDTO
     {
-        public string sifra { get; set; }
-        public string naziv { get; set; }
-        public int idSobe { get; set; }
-        public string poslednjeOdrzavanje { get; set; }
+        public string code { get; set; }
+        public string name { get; set; }
+        public int roomId { get; set; }
+        public string lastMaintenance { get; set; }
     }
 }
