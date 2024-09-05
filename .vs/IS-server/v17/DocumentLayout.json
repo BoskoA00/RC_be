@@ -5,6 +5,22 @@
     {
       "AbsoluteMoniker": "D:0:0:{B0399196-D50E-48F1-87B3-B26E10328A27}|IS-server.csproj|c:\\users\\laptop\\desktop\\is-projekat\\is-server\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{B0399196-D50E-48F1-87B3-B26E10328A27}|IS-server.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B0399196-D50E-48F1-87B3-B26E10328A27}|IS-server.csproj|c:\\users\\laptop\\desktop\\is-projekat\\is-server\\dto\\reportresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B0399196-D50E-48F1-87B3-B26E10328A27}|IS-server.csproj|solutionrelative:dto\\reportresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B0399196-D50E-48F1-87B3-B26E10328A27}|IS-server.csproj|c:\\users\\laptop\\desktop\\is-projekat\\is-server\\dto\\addsessiondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B0399196-D50E-48F1-87B3-B26E10328A27}|IS-server.csproj|solutionrelative:dto\\addsessiondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B0399196-D50E-48F1-87B3-B26E10328A27}|IS-server.csproj|c:\\users\\laptop\\desktop\\is-projekat\\is-server\\controllers\\roomcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B0399196-D50E-48F1-87B3-B26E10328A27}|IS-server.csproj|solutionrelative:controllers\\roomcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B0399196-D50E-48F1-87B3-B26E10328A27}|IS-server.csproj|c:\\users\\laptop\\desktop\\is-projekat\\is-server\\controllers\\equipmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B0399196-D50E-48F1-87B3-B26E10328A27}|IS-server.csproj|solutionrelative:controllers\\equipmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,8 +30,57 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ReportResponseDTO.cs",
+              "DocumentMoniker": "C:\\Users\\Laptop\\Desktop\\IS-projekat\\IS-server\\DTO\\ReportResponseDTO.cs",
+              "RelativeDocumentMoniker": "DTO\\ReportResponseDTO.cs",
+              "ToolTip": "C:\\Users\\Laptop\\Desktop\\IS-projekat\\IS-server\\DTO\\ReportResponseDTO.cs",
+              "RelativeToolTip": "DTO\\ReportResponseDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAiAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-05T14:00:39.803Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "EquipmentController.cs",
+              "DocumentMoniker": "C:\\Users\\Laptop\\Desktop\\IS-projekat\\IS-server\\Controllers\\EquipmentController.cs",
+              "RelativeDocumentMoniker": "Controllers\\EquipmentController.cs",
+              "ToolTip": "C:\\Users\\Laptop\\Desktop\\IS-projekat\\IS-server\\Controllers\\EquipmentController.cs",
+              "RelativeToolTip": "Controllers\\EquipmentController.cs",
+              "ViewState": "AQIAAEYAAAAAAAAAAAAAABkAAAAxAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-05T13:13:52.943Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "RoomController.cs",
+              "DocumentMoniker": "C:\\Users\\Laptop\\Desktop\\IS-projekat\\IS-server\\Controllers\\RoomController.cs",
+              "RelativeDocumentMoniker": "Controllers\\RoomController.cs",
+              "ToolTip": "C:\\Users\\Laptop\\Desktop\\IS-projekat\\IS-server\\Controllers\\RoomController.cs",
+              "RelativeToolTip": "Controllers\\RoomController.cs",
+              "ViewState": "AQIAAA4AAAAAAAAAAAAAACUAAABeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-05T13:13:42.085Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AddSessionDTO.cs",
+              "DocumentMoniker": "C:\\Users\\Laptop\\Desktop\\IS-projekat\\IS-server\\DTO\\AddSessionDTO.cs",
+              "RelativeDocumentMoniker": "DTO\\AddSessionDTO.cs",
+              "ToolTip": "C:\\Users\\Laptop\\Desktop\\IS-projekat\\IS-server\\DTO\\AddSessionDTO.cs",
+              "RelativeToolTip": "DTO\\AddSessionDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-04T21:37:52.485Z"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -24,7 +89,7 @@
               "RelativeDocumentMoniker": "appsettings.json",
               "ToolTip": "C:\\Users\\Laptop\\Desktop\\IS-projekat\\IS-server\\appsettings.json",
               "RelativeToolTip": "appsettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAARAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2024-09-04T21:18:09.179Z",
               "EditorCaption": ""

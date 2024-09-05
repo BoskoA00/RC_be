@@ -33,9 +33,9 @@ namespace IS_server.Controllers
         }
 
         [HttpGet("ByRoomNumber/{roomNumber}")]
-        public async Task<IActionResult> GetRoomByNumber([FromRoute] string roomNubmer)
+        public async Task<IActionResult> GetRoomByNumber([FromRoute] string roomNumber)
         {
-            return Ok(mapper.Map<RoomResponseDTO>(await roomService.GetRoomByNumber(roomNubmer)));
+            return Ok(mapper.Map<RoomResponseDTO>(await roomService.GetRoomByNumber(roomNumber)));
         }
 
         [HttpPost]

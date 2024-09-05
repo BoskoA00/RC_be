@@ -137,7 +137,7 @@ namespace IS_server.Controllers
             return NoContent();
         }
 
-        [HttpGet("codeTaken/{sifra}")]
+        [HttpGet("codeTaken/{code}")]
         public async Task<IActionResult> SifraProvera([FromRoute] string code)
         {
             var isTaken = await equipmentService.CodeTaken(code);
